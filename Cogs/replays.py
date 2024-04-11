@@ -395,22 +395,12 @@ class Replay(commands.Cog):
     @slash.describe(
         url="Enter showdown replay link"
     )
-    @slash.choices(
-        theme=[
-            slash.Choice(name="🔴 Normal (default)", value="normal"),
-            slash.Choice(name="🟢 Compact", value="simple"),
-            slash.Choice(name="🔵 Pixel", value="pixel")
-        ]
-    )
-    async def replay(self, ctx, url: str, theme: str = "advanced"):
+    async def replay(self, ctx, url: str):
         """View ps replays onto discord!"""
         await ctx.defer()
-        # The ps replay viewer should act as an archive of ps replays through snapshots
+        # The ps replay viewer should act as an archive of ps replays
         # while also being able to give users on discord a lazier way to watch the replay
 
-        # normal theme involves saving the replay visually as well and is resource expensive for pokearena
-        # compact theme involves no image archive
-        # pixel theme involves image archive but through pillow generated images for each turn
         if not url.startswith('https://replay.pokemonshowdown.com/'):
             return await ctx.send('Please enter a valid showdown replay link.', ephemeral=True)
         if url.endswith(('.json', '.log')):
@@ -463,10 +453,6 @@ class Replay(commands.Cog):
         emb_2 = discord.Embed(color=discord.Color.gold())
         emb_2.description = turn_texts[0]
         ReplayViewerView.set_emb_img(emb_2.description, emb_2)
-
-        # TODO: Add team count to p1 and p2 team
-        # TODO: Add pokemon emotes and pokeball emotes
-        # TODO: Add team count to p1 and p2 team
 
         view = ReplayViewerView(ctx.author.id, turn_texts, turn_texts2, [], format_text, battle_format, theme, p1, p2)
         await ctx.send(embeds=[emb, emb_2], view=view)

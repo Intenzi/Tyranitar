@@ -42,9 +42,7 @@ CREATE TABLE IF NOT EXISTS psreplays (
     replayid TEXT PRIMARY KEY,
     format_text TEXT,
     battle_text1 TEXT[],
-    battle_text2 TEXT[],
-    sc_img TEXT[],
-    gen_img TEXT[]
+    battle_text2 TEXT[]
 );
 """
 
