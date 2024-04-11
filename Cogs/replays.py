@@ -179,8 +179,8 @@ class ReplayViewerView(View):
     @staticmethod
     def set_jumped_emb_img(emb, turn_texts, previous_turn, new_turn):
         """Need a go through of all turns based on jump for finalising image"""
-        opposing_mon_pattern = re.compile(r'(?:\n|^)?.+?sent out.+?\*\*(.+?)\*\*\)?!(?:\n|$)')
-        player_mon_pattern = re.compile(r'(?:\n|^)?Go!.+?\*\*(.+?)\*\*\)?!(?:\n|$)')
+        opposing_mon_pattern = re.compile(r'(?:\n|^).+?sent out.+?\*\*(.+?)\*\*\)?!(?:\n|$)')
+        player_mon_pattern = re.compile(r'(?:\n|^)Go!.+?\*\*(.+?)\*\*\)?!(?:\n|$)')
         # jumped ahead
         if new_turn > previous_turn:
             # we need text from previous turn till the latest turn
